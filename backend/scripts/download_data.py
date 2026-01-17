@@ -25,10 +25,14 @@ def fetch_stock_data(name ,ticker):
     df = yf.download(ticker ,period="2y")
     df=df.reset_index()
     df["symbol"]=name
-    
+
     df.columns= [c[0].lower() if isinstance(c,tuple) else c.lower()
                  for c in df.columns]
-    
+    df["daily_return"]=(df["close"]-df["open"])/df["open"]
+    df["ma_7"]=df["close"].rolling(7).mean()
+    df["week52_high"] = df["high"].rolling(252).max()
+    df["week52_low"] = df["high"].rolling(252).min()
+
     print("df-", df)
     print("-" * 40)
 
