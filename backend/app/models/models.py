@@ -24,7 +24,7 @@ class StockPrice(Base):
     low=Column(Float)
 
     ma_7=Column(Float)
-    week52_high=Column(float)
+    week52_high=Column(Float)
     week52_low=Column(Float)
 
     company =relationship("company", back_populates="prices")
