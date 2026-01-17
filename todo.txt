@@ -1,0 +1,5 @@
+One final "Portfolio Tip" for 2026:
+Since many beginners do "stock price" projects, make yours unique by adding one extra feature:
+A "Mock Portfolio": Let users "buy" 10 shares of TCS and 5 shares of Mahindra, and show them their total profit/loss based on your cleaned, updated CSV data.
+Data Visualization: Add a simple chart (using a library like Plotly or Matplotlib) to your API's front-end so recruiters can see your data in action immediately. 
+
