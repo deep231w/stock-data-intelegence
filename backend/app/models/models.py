@@ -1,0 +1,30 @@
+from sqlalchemy import Column ,Integer , String, Float ,Date, ForeignKey
+from sqlalchemy.orm import declarative_base, relationship
+
+Base =declarative_base()
+
+class Company(Base):
+    __tablename__="companies"
+
+    id =Column(Integer,primary_key=True)
+    symbol=Column(String, unique=True , index=True)
+
+    prices= relationship("StockPrice", back_populates="company")
+
+class StockPrice(Base):
+    __tablename__="stockprice"
+
+    id=Column(Integer , primary_key=True )
+    company_id= Column(Integer, ForeignKey("companies.id"), index=True)
+    date= Column(Date, index=True)
+
+    open=Column(Float)
+    close=Column(Float)
+    high=Column(Float)
+    low=Column(Float)
+
+    ma_7=Column(Float)
+    week52_high=Column(float)
+    week52_low=Column(Float)
+
+    company =relationship("company", back_populates="prices")
