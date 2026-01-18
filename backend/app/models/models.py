@@ -12,7 +12,7 @@ class Company(Base):
     prices= relationship("StockPrice", back_populates="company")
 
 class StockPrice(Base):
-    __tablename__="stockprice"
+    __tablename__="stock_prices"
 
     id=Column(Integer , primary_key=True )
     company_id= Column(Integer, ForeignKey("companies.id"), index=True)
@@ -27,4 +27,4 @@ class StockPrice(Base):
     week52_high=Column(Float)
     week52_low=Column(Float)
 
-    company =relationship("company", back_populates="prices")
+    company =relationship("Company", back_populates="prices")
