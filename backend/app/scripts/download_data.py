@@ -35,6 +35,7 @@ def fetch_stock_data(name ,ticker):
 
     print("df-", df)
     print("-" * 40)
+    return df
 
 
 def main():

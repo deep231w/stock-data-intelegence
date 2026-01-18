@@ -22,6 +22,8 @@ class StockPrice(Base):
     close=Column(Float)
     high=Column(Float)
     low=Column(Float)
+    
+    daily_return=Column(Float)
 
     ma_7=Column(Float)
     week52_high=Column(Float)

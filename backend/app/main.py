@@ -1,5 +1,5 @@
 from fastapi import FastAPI;
-from app.api.routes import companies
+from app.api.routes import companies, data
 from fastapi.middleware.cors import CORSMiddleware
 
 app= FastAPI()
@@ -17,3 +17,4 @@ def root():
     return {"message": "fastapi Server running "}
 
 app.include_router(companies.router)
+app.include_router(data.router)
