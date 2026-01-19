@@ -17,7 +17,7 @@ TICKERS = {
 }
 
 
-@router.get("/")
+@router.get("/{symbol}")
 def get_data(symbol:str ,db:Session=Depends(get_db)):
 
     try:
@@ -42,8 +42,10 @@ def get_data(symbol:str ,db:Session=Depends(get_db)):
         
         last_trading_day= get_last_trading_day()
 
+        print("latest db date:", stock_data[0].date if stock_data else None)
+        print("last trading day:", last_trading_day)
 
-        if not stock_data or stock_data[0].date == last_trading_day:
+        if not stock_data or stock_data[0].date != last_trading_day:
             print("refreshing stock data ....")
             df = fetch_stock_data(
                 name=company.symbol,
@@ -60,7 +62,7 @@ def get_data(symbol:str ,db:Session=Depends(get_db)):
         
         return {
             "company":company,
-            "stock data":stock_data
+            "stock_data":stock_data
         }
     
     except ConnectionError as e:
