@@ -32,6 +32,7 @@ function App() {
   const [error, setError] = useState(null)
   const [summary, setSummary]=useState();
   const [company2, setCompany2]=useState(null);
+  const [compareData, setCompareData]=useState();
 
   useEffect(() => {
     fetchCompanies()
@@ -155,6 +156,7 @@ useEffect(()=>{
       );
       const data = await res.json();
       console.log("compare result:", data);
+      setCompareData(data)
     } catch (e) {
       console.log("error in fetch compare - ", e);
     }
@@ -221,9 +223,24 @@ useEffect(()=>{
                 </select>
               </div>
             }
-            <div className='compare-data'>
-              <p>Winner is Tcs</p>
-            </div>
+            {compareData &&<div className='compare-data'>
+              <div className='sock-data'>
+                <div className='stock'>
+                  <h5>{compareData.stock_1.symbol}</h5>
+                  <p>Return Percentage:<span style={{color:"blue"}}>{compareData.stock_1.return_percent}</span></p>
+                  <p>Volatility:<span style={{color:"blue"}}>{compareData.stock_1.volatility}</span></p>
+                </div>
+                <div className='stock'>
+                  <h5>{compareData.stock_2.symbol}</h5>
+                  <p>Return Percentage:<span style={{color:"blue"}}>{compareData.stock_2.return_percent}</span></p>
+                  <p>Volatility:<span style={{color:"blue"}}>{compareData.stock_2.volatility}</span></p>
+                </div>
+              </div>
+              <div className='performance-data'>
+                <p>Better Return: <span style={{color:"green"}}>{compareData.comparison.better_return}</span></p>
+                <p>More Volatile: <span style={{color:"green"}}>{compareData.comparison.more_volatile}</span></p>
+              </div>
+            </div>}
           </div>
         </div>
 
