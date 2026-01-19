@@ -12,6 +12,8 @@ class Settings(BaseSettings):
 
 settings= Settings()
 
+print("USING DATABASE URL:", settings.database_url)
+
 engine =create_engine(settings.database_url , echo=True)
 
 SessionLocal = sessionmaker(
