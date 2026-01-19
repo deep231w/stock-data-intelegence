@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 )
 
-const API_BASE = 'https://stock-data-intelegence.onrender.com/'
+const API_BASE = 'https://stock-data-intelegence.onrender.com'
 
 function App() {
   const [companies, setCompanies] = useState([])
