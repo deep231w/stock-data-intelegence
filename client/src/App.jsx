@@ -26,11 +26,12 @@ const API_BASE = 'http://127.0.0.1:8000'
 
 function App() {
   const [companies, setCompanies] = useState([])
-  const [selectedCompany, setSelectedCompany] = useState(null)
+  const [selectedCompany, setSelectedCompany] = useState()
   const [stockData, setStockData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [summary, setSummary]=useState(null);
+  const [summary, setSummary]=useState();
+  const [company2, setCompany2]=useState("");
 
   useEffect(() => {
     fetchCompanies()
@@ -50,6 +51,7 @@ function App() {
   const fetchStockData = async (symbol) => {
     setLoading(true)
     setError(null)
+    setCompany2("")
     try {
       const response = await fetch(`${API_BASE}/data/${symbol}`)
       console.log("response of stock data")
@@ -142,6 +144,16 @@ const fieldMap = [
   {key: "week52_low", label: '52W Low'},
 ];
 
+//compare between 2 company fetch
+useEffect(async()=>{
+  try{
+    const res=await fetch()
+
+  }catch(e){
+    console.log("error in fetch compare - ", e);
+  }
+},[company2])
+
   return (
     <div className="app">
       <div className="sidebar">
@@ -184,7 +196,24 @@ const fieldMap = [
           </div>
           <div className='compare-content'>
             <h1>Compare</h1>
-
+            {stockData &&
+              <div className='compare-set'>
+                <p>Compare {selectedCompany} with:</p>
+                <select value={company2} onChange={(e)=>setCompany2(e.target.value)}>
+                  <option value="">Select company</option>
+                  {companies
+                    .filter(company => company.symbol !== selectedCompany)
+                    .map(company => (
+                      <option key={company.symbol} value={company.symbol}>
+                        {company.symbol}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            }
+            <div className='compare-data'>
+              <p>Winner is Tcs</p>
+            </div>
           </div>
         </div>
 

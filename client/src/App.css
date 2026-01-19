@@ -73,7 +73,19 @@
 .summary-data{
   color: green;
 }
-
+/* compare  */
+.compare-content{
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+.compare-set{
+  display: flex;
+  flex-direction: row;
+}
+.compare-set button{
+  
+}
 .chart-container {
   height: 320px;  
   background-color: white;
