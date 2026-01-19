@@ -51,9 +51,11 @@ function App() {
     setError(null)
     try {
       const response = await fetch(`${API_BASE}/data/${symbol}`)
+      console.log("response of stock data")
       if (!response.ok) throw new Error('Failed to fetch stock data')
       const data = await response.json()
-      setStockData(data)
+      console.log("data res- ",data)
+      setStockData(data.stock_data)
       setSelectedCompany(symbol)
     } catch (err) {
       setError(err.message)
