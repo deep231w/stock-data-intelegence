@@ -30,6 +30,7 @@ function App() {
   const [stockData, setStockData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [summary, setSummary]=useState(null);
 
   useEffect(() => {
     fetchCompanies()
@@ -108,14 +109,26 @@ function App() {
       },
     },
   }
-const data = [
-  { id: 1, name: 'John Doe', age: 25 },
-  { id: 2, name: 'Jane Doe', age: 30 },
-];
-const columns = [
-  { key: 'name', header: 'Name' },
-  { key: 'age', header: 'Age' },
-]
+//fetch summary of company
+  // useEffect(()=>{
+  //   try{
+  //     const response= await
+  //   }catch(e){
+  //     console.log("error during fetch summary-", e);
+  //   }
+  // },[chartData])
+  const fetchSummary= async(symbol)=>{
+    setLoading(true)
+    setError(null)
+    try{
+      const res= await fetch(`${API_BASE}/summary/${symbol}`)
+      const data= await res.json()
+      console.log("res of summary- ", data);
+      setSummary(data?.summary);
+    }catch(e){
+      console.log("error in fetch summary -", e);
+    }
+  }
 
 const fieldMap = [
   {key: "date", label: 'Date'},
@@ -140,7 +153,10 @@ const fieldMap = [
             <li
               key={index}
               className={`company-item ${selectedCompany === company.symbol ? 'selected' : ''}`}
-              onClick={() => fetchStockData(company.symbol)}
+              onClick={() => (
+                fetchStockData(company.symbol),
+                fetchSummary(company.symbol)
+              )}
             >
               {company.symbol}
             </li>
@@ -158,11 +174,13 @@ const fieldMap = [
           </div>
           <div className='summary-content'>
             <h1>summary</h1>
-            <div className='summary-data'>
-              <h4>52 Week High :<span style={{color:"black"}}>34644</span></h4>
-              <h4>52 Week Low :<span style={{color:"black"}}>34644</span></h4>
-              <h4>7 Day Moving Average:<span style={{color:"black"}}>34644</span></h4>
-            </div>
+            {summary && 
+              <div className='summary-data'>
+                <h4>52 Week High :<span style={{color:"black"}}>{summary.week52_high.toFixed(2)}</span></h4>
+                <h4>52 Week Low :<span style={{color:"black"}}>{summary.week52_low.toFixed(2)}</span></h4>
+                <h4>7 Day Moving Average:<span style={{color:"black"}}>{summary.ma_7.toFixed(2)}</span></h4>
+              </div>
+            }
           </div>
           <div className='compare-content'>
             <h1>Compare</h1>
