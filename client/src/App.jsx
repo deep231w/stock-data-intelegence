@@ -158,6 +158,11 @@ const fieldMap = [
           </div>
           <div className='summary-content'>
             <h1>summary</h1>
+            <div className='summary-data'>
+              <h4>52 Week High :<span style={{color:"black"}}>34644</span></h4>
+              <h4>52 Week Low :<span style={{color:"black"}}>34644</span></h4>
+              <h4>7 Day Moving Average:<span style={{color:"black"}}>34644</span></h4>
+            </div>
           </div>
           <div className='compare-content'>
             <h1>Compare</h1>
@@ -178,17 +183,16 @@ const fieldMap = [
                 </tr>
               </thead>
               <tbody>
-  {chartData && stockData.map((row) => (
-    <tr key={row.id}>
-      {fieldMap.map(({ key }) => (
-        <td key={key}>
-          {row[key]}
-        </td>
-      ))}
-    </tr>
-  ))}
-</tbody>
-
+                {chartData && stockData.map((row) => (
+                  <tr key={row.id}>
+                    {fieldMap.map(({ key }) => (
+                      <td key={key}>
+                        {row[key]}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
             </table>
           {/* } */}
         </div>
