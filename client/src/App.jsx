@@ -108,6 +108,26 @@ function App() {
       },
     },
   }
+const data = [
+  { id: 1, name: 'John Doe', age: 25 },
+  { id: 2, name: 'Jane Doe', age: 30 },
+];
+const columns = [
+  { key: 'name', header: 'Name' },
+  { key: 'age', header: 'Age' },
+]
+
+const fieldMap = [
+  {key: "date", label: 'Date'},
+  {key: "open", label: 'Open Price'},
+  {key: "close", label: 'Close Price'},
+  {key: "high", label: 'High'},
+  {key: "low", label: 'Low'},
+  {key: "daily_return", label: 'Daily Return'},
+  {key: "ma_7", label: '7 Day MA'},
+  {key: "week52_high", label: '52W High'},
+  {key: "week52_low", label: '52W Low'},
+];
 
   return (
     <div className="app">
@@ -145,13 +165,33 @@ function App() {
           </div>
         </div>
 
-        <div className='list-stock-data'>
-          <h1>List of stock data</h1>
-          <div>
-            
-          </div>
+        <div className="">
+          <h1>Stock Details</h1>
+
+          {/* {chartData&& */}
+            <table className="detail-table">
+              <thead>
+                <tr >
+                  {fieldMap.map(({key,label})=>(
+                      <th key={key}>{label}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+  {chartData && stockData.map((row) => (
+    <tr key={row.id}>
+      {fieldMap.map(({ key }) => (
+        <td key={key}>
+          {row[key]}
+        </td>
+      ))}
+    </tr>
+  ))}
+</tbody>
+
+            </table>
+          {/* } */}
         </div>
-        
         {!chartData && !loading && (
           <div className="placeholder">
             <p>Select a company from the list to view its stock price chart</p>
