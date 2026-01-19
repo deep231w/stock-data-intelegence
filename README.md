@@ -5,4 +5,4 @@
 ![swagger doc](screenshots/swagger-doc.png)
 
 # UI
-![ui](screenshots/ui.png)
+![ui](screenshots/stock-ui.png)
