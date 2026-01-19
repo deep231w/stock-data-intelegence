@@ -1,5 +1,5 @@
 from fastapi import FastAPI;
-from app.api.routes import companies, data,summary
+from app.api.routes import companies, data,summary ,compare
 from fastapi.middleware.cors import CORSMiddleware
 
 app= FastAPI()
@@ -19,3 +19,4 @@ def root():
 app.include_router(companies.router)
 app.include_router(data.router)
 app.include_router(summary.router)
+app.include_router(compare.router)

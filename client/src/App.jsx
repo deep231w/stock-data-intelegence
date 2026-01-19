@@ -31,7 +31,7 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [summary, setSummary]=useState();
-  const [company2, setCompany2]=useState("");
+  const [company2, setCompany2]=useState(null);
 
   useEffect(() => {
     fetchCompanies()
@@ -145,13 +145,23 @@ const fieldMap = [
 ];
 
 //compare between 2 company fetch
-useEffect(async()=>{
-  try{
-    const res=await fetch()
+useEffect(()=>{
+  if(!selectedCompany || !company2) return;
 
-  }catch(e){
-    console.log("error in fetch compare - ", e);
-  }
+  const fetchCompare = async () => {
+    try {
+      const res = await fetch(
+        `${API_BASE}/compare/?symbol1=${selectedCompany}&symbol2=${company2}`
+      );
+      const data = await res.json();
+      console.log("compare result:", data);
+    } catch (e) {
+      console.log("error in fetch compare - ", e);
+    }
+  };
+
+  fetchCompare();
+
 },[company2])
 
   return (
