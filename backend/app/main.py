@@ -8,7 +8,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://stock-data-intelegence-pm2z.vercel.app/"
+        "https://stock-data-intelegence-pm2z.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
