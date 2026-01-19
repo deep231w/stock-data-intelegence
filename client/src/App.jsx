@@ -214,10 +214,10 @@ useEffect(()=>{
                 <select value={company2} onChange={(e)=>setCompany2(e.target.value)}>
                   <option value="">Select company</option>
                   {companies
-                    .filter(company => company.symbol !== selectedCompany)
+                    .filter(company => company?.symbol !== selectedCompany)
                     .map(company => (
-                      <option key={company.symbol} value={company.symbol}>
-                        {company.symbol}
+                      <option key={company?.symbol} value={company?.symbol}>
+                        {company?.symbol}
                       </option>
                     ))}
                 </select>
@@ -226,19 +226,19 @@ useEffect(()=>{
             {compareData &&<div className='compare-data'>
               <div className='sock-data'>
                 <div className='stock'>
-                  <h5>{compareData.stock_1.symbol}</h5>
-                  <p>Return Percentage:<span style={{color:"blue"}}>{compareData.stock_1.return_percent}</span></p>
-                  <p>Volatility:<span style={{color:"blue"}}>{compareData.stock_1.volatility}</span></p>
+                  <h5>{compareData?.stock_1?.symbol}</h5>
+                  <p>Return Percentage:<span style={{color:"blue"}}>{compareData?.stock_1?.return_percent}</span></p>
+                  <p>Volatility:<span style={{color:"blue"}}>{compareData?.stock_1?.volatility}</span></p>
                 </div>
                 <div className='stock'>
-                  <h5>{compareData.stock_2.symbol}</h5>
-                  <p>Return Percentage:<span style={{color:"blue"}}>{compareData.stock_2.return_percent}</span></p>
-                  <p>Volatility:<span style={{color:"blue"}}>{compareData.stock_2.volatility}</span></p>
+                  <h5>{compareData?.stock_2.symbol}</h5>
+                  <p>Return Percentage:<span style={{color:"blue"}}>{compareData?.stock_2?.return_percent}</span></p>
+                  <p>Volatility:<span style={{color:"blue"}}>{compareData?.stock_2?.volatility}</span></p>
                 </div>
               </div>
               <div className='performance-data'>
-                <p>Better Return: <span style={{color:"green"}}>{compareData.comparison.better_return}</span></p>
-                <p>More Volatile: <span style={{color:"green"}}>{compareData.comparison.more_volatile}</span></p>
+                <p>Better Return: <span style={{color:"green"}}>{compareData?.comparison?.better_return}</span></p>
+                <p>More Volatile: <span style={{color:"green"}}>{compareData?.comparison?.more_volatile}</span></p>
               </div>
             </div>}
           </div>
@@ -258,8 +258,8 @@ useEffect(()=>{
               </thead>
               <tbody>
                 {chartData && stockData.map((row) => (
-                  <tr key={row.id}>
-                    {fieldMap.map(({ key }) => (
+                  <tr key={row?.id}>
+                    {fieldMap?.map(({ key }) => (
                       <td key={key}>
                         {row[key]}
                       </td>

@@ -33,5 +33,5 @@ def insert_stock_data(
         )
 
         db.add(stock)
-
+        print("single stock added to db-",stock)
     db.commit()
