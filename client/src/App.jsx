@@ -64,6 +64,19 @@ function App() {
     }
   }
 
+  const emptyChartData = {
+  labels: [],
+  datasets: [
+    {
+      label: 'Closing Price',
+      data: [],
+      borderColor: 'rgba(200,200,200,0.5)',
+      backgroundColor: 'rgba(200,200,200,0.1)',
+      tension: 0.1,
+    },
+  ],
+}
+
   const chartData = stockData ? {
     labels: stockData.map(item => item.date),
     datasets: [
@@ -79,6 +92,7 @@ function App() {
 
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
@@ -114,13 +128,30 @@ function App() {
         </ul>
       </div>
       <div className="main-content">
-        <h1>Stock Data Intelligence</h1>
+        {/* <h1>Stock Data Intelligence</h1> */}
         {loading && <div className="loading">Loading...</div>}
-        {chartData && (
+        <div className='upper-content'>
           <div className="chart-container">
-            <Line data={chartData} options={chartOptions} />
+            {chartData && (
+                <Line data={chartData} options={chartOptions} />
+            )}
           </div>
-        )}
+          <div className='summary-content'>
+            <h1>summary</h1>
+          </div>
+          <div className='compare-content'>
+            <h1>Compare</h1>
+
+          </div>
+        </div>
+
+        <div className='list-stock-data'>
+          <h1>List of stock data</h1>
+          <div>
+            
+          </div>
+        </div>
+        
         {!chartData && !loading && (
           <div className="placeholder">
             <p>Select a company from the list to view its stock price chart</p>
