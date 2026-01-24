@@ -187,12 +187,13 @@ const formatValue = (key, value) => {
             <li
               key={index}
               className={`company-item ${selectedCompany === company.symbol ? 'selected' : ''}`}
-              onClick={() => (
+              onClick={() => {
+                if(company.symbol === selectedCompany) return;
                 fetchStockData(company.symbol),
                 fetchSummary(company.symbol)
-              )}
+              }}
             >
-              {company.symbol}
+              {company.symbol.charAt(0).toUpperCase() + company.symbol.slice(1)}
             </li>
           ))}
         </ul>
@@ -220,14 +221,14 @@ const formatValue = (key, value) => {
             <h1>Compare</h1>
             {stockData &&
               <div className='compare-set'>
-                <p>Compare {selectedCompany} with:</p>
+                <p>Compare <span style={{fontWeight:"bold"}}>{selectedCompany.charAt(0).toUpperCase() +selectedCompany.slice(1)}</span> with:</p>
                 <select value={company2} onChange={(e)=>setCompany2(e.target.value)}>
                   <option value="">Select company</option>
                   {companies
                     .filter(company => company?.symbol !== selectedCompany)
                     .map(company => (
                       <option key={company?.symbol} value={company?.symbol}>
-                        {company?.symbol}
+                        {company?.symbol.charAt(0).toUpperCase() + company.symbol.slice(1)}
                       </option>
                     ))}
                 </select>
