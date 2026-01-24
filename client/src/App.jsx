@@ -166,6 +166,16 @@ useEffect(()=>{
 
 },[company2])
 
+const formatValue = (key, value) => {
+  if (value == null) return "-";
+
+  if (key === "date") return value;
+
+  if (typeof value === "number") return value.toFixed(2);
+
+  return value;
+};
+
   return (
     <div className="app">
       <div className="sidebar">
@@ -261,7 +271,7 @@ useEffect(()=>{
                   <tr key={row?.id}>
                     {fieldMap?.map(({ key }) => (
                       <td key={key}>
-                        {row[key]}
+                        {formatValue(key,row[key])}
                       </td>
                     ))}
                   </tr>
